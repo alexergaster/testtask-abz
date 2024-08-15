@@ -135,10 +135,13 @@ class Service
             "width" => 70,
             "height" => 70
         ));
-
-        $converted = $resized->convert(array("type" => "image/jpg"));
         $pathInfo = pathinfo($fullPath);
-        $converted->toFile($pathInfo ['dirname'] . '/' . $pathInfo['filename'] . '.jpg');
+
+        if($pathInfo['extension'] !== 'jpg'){
+            $converted = $resized->convert(array("type" => "image/jpg"));
+
+            $converted->toFile($pathInfo ['dirname'] . '/' . $pathInfo['filename'] . '.jpg');
+        }
 
         unlink($fullPath);
         return 'images/' . $pathInfo['filename'] . '.jpg';
