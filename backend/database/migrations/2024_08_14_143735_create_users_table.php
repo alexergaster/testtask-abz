@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,7 +14,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 50);
+            $table->string('email', 50)->unique();
+            $table->string('phone', 15);
+            $table->string('image');
+            $table->timestamp('registration_timestamp')->nullable()
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
 
+            $table->unsignedBigInteger('position_id');
         });
     }
 
