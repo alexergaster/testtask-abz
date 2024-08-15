@@ -30,6 +30,7 @@ class StoreRequest extends FormRequest
             'position_id' => 'required|integer|exists:positions,id',
         ];
     }
+
     public function messages(): array
     {
         return [
