@@ -137,13 +137,13 @@ class Service
         ));
         $pathInfo = pathinfo($fullPath);
 
-        if($pathInfo['extension'] !== 'jpg'){
-            $converted = $resized->convert(array("type" => "image/jpg"));
+        $converted = $resized->convert(array("type" => "image/jpg"));
 
-            $converted->toFile($pathInfo ['dirname'] . '/' . $pathInfo['filename'] . '.jpg');
+        $converted->toFile($pathInfo ['dirname'] . '/' . $pathInfo['filename'] . '.jpg');
+
+        if ($pathInfo['extension'] !== 'jpg') {
+            unlink($fullPath);
         }
-
-        unlink($fullPath);
         return 'images/' . $pathInfo['filename'] . '.jpg';
     }
 
